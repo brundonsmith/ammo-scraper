@@ -1,7 +1,7 @@
 {
   "name": "ammo-scraper",
   "version": "1.0.0",
-  "description": "",
+  "description": "Scrapes the Bullet physics library docs and creates TypeScript class declarations for Ammo.js",
   "main": "index.js",
   "scripts": {
     "generate": "node index.js",
