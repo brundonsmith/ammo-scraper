@@ -1,0 +1,51 @@
+declare module Ammo {
+  declare class btGeneric6DofConstraint {
+    constructor();
+    constructor(rbA: btRigidBody, rbB: btRigidBody, frameInA: btTransform, frameInB: btTransform, useLinearReferenceFrameA: boolean);
+    constructor(rbB: btRigidBody, frameInB: btTransform, useLinearReferenceFrameB: boolean);
+    calculateTransforms(transA: btTransform, transB: btTransform): void;
+    calculateTransforms(): void;
+    getCalculatedTransformA(): btTransform;
+    getCalculatedTransformB(): btTransform;
+    getFrameOffsetA(): btTransform;
+    getFrameOffsetB(): btTransform;
+    getFrameOffsetA(): btTransform;
+    getFrameOffsetB(): btTransform;
+    buildJacobian(): void;
+    getInfo1(info: btConstraintInfo1): void;
+    getInfo1NonVirtual(info: btConstraintInfo1): void;
+    getInfo2(info: btConstraintInfo2): void;
+    getInfo2NonVirtual(info: btConstraintInfo2, transA: btTransform, transB: btTransform, linVelA: btVector3, linVelB: btVector3, angVelA: btVector3, angVelB: btVector3): void;
+    updateRHS(timeStep: number): void;
+    getAxis(axis_index: number): btVector3;
+    getAngle(axis_index: number): number;
+    getRelativePivotPosition(axis_index: number): number;
+    setFrames(frameA: btTransform, frameB: btTransform): void;
+    testAngularLimitMotor(axis_index: number): boolean;
+    setLinearLowerLimit(linearLower: btVector3): void;
+    getLinearLowerLimit(linearLower: btVector3): void;
+    setLinearUpperLimit(linearUpper: btVector3): void;
+    getLinearUpperLimit(linearUpper: btVector3): void;
+    setAngularLowerLimit(angularLower: btVector3): void;
+    getAngularLowerLimit(angularLower: btVector3): void;
+    setAngularUpperLimit(angularUpper: btVector3): void;
+    getAngularUpperLimit(angularUpper: btVector3): void;
+    getRotationalLimitMotor(index: number): btRotationalLimitMotor;
+    getTranslationalLimitMotor(): btTranslationalLimitMotor;
+    setLimit(axis: number, lo: number, hi: number): void;
+    isLimited(limitIndex: number): boolean;
+    calcAnchorPos(d: voi): void;
+    get_limit_motor_info2(limot: btRotationalLimitMotor, transA: btTransform, transB: btTransform, linVelA: btVector3, linVelB: btVector3, angVelA: btVector3, angVelB: btVector3, info: btConstraintInfo2, row: number, ax1: btVector3, rotational: number, rotAllowed: number): number;
+    getUseFrameOffset(): boolean;
+    setUseFrameOffset(frameOffsetOnOff: boolean): void;
+    getUseLinearReferenceFrameA(): boolean;
+    setUseLinearReferenceFrameA(linearReferenceFrameA: boolean): void;
+    setParam(num: number, value: number, axis: number): void;
+    getParam(num: number, axis: number): number;
+    setAxis(axis1: btVector3, axis2: btVector3): void;
+    getFlags(): number;
+    calculateSerializeBufferSize(): number;
+    serialize(dataBuffer: void, serializer: btSerializer): string;
+    get_m_useSolveConstraintObsolete(): boolean;	set_m_useSolveConstraintObsolete(value: boolean): boolean;
+  }
+}
