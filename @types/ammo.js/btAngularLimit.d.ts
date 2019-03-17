@@ -1,18 +1,20 @@
 declare module Ammo {
   declare class btAngularLimit {
     constructor();
-    set(low: number, high: number, _softness: number, _biasFactor: number, _relaxationFactor: number): void;
-    test(angle: number): void;
+
+
+    fit(angle: number): void;
+    getLow(): number;
     getSoftness(): number;
     getBiasFactor(): number;
     getRelaxationFactor(): number;
     getCorrection(): number;
-    getSign(): number;
-    getHalfRange(): number;
-    isLimit(): boolean;
-    fit(angle: number): void;
     getError(): number;
-    getLow(): number;
+    getHalfRange(): number;
     getHigh(): number;
+    getSign(): number;
+    isLimit(): boolean;
+    set(low: number, high: number, _softness: number, _biasFactor: number, _relaxationFactor: number): void;
+    test(angle: number): void;
   }
 }

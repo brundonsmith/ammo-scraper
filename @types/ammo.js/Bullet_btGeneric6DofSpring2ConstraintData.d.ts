@@ -1,7 +1,8 @@
 declare module Ammo {
   declare class Bullet_btGeneric6DofSpring2ConstraintData {
+
+    get_m_linearSpringDampingLimited(): string;	set_m_linearSpringDampingLimited(value: string): string;
     get_m_typeConstraintData(): btTypedConstraintData;	set_m_typeConstraintData(value: btTypedConstraintData): btTypedConstraintData;
-    get_m_rbAFrame(): btTransformFloatData;	set_m_rbAFrame(value: btTransformFloatData): btTransformFloatData;
     get_m_rbBFrame(): btTransformFloatData;	set_m_rbBFrame(value: btTransformFloatData): btTransformFloatData;
     get_m_linearUpperLimit(): btVector3FloatData;	set_m_linearUpperLimit(value: btVector3FloatData): btVector3FloatData;
     get_m_linearLowerLimit(): btVector3FloatData;	set_m_linearLowerLimit(value: btVector3FloatData): btVector3FloatData;
@@ -20,7 +21,7 @@ declare module Ammo {
     get_m_linearServoMotor(): string;	set_m_linearServoMotor(value: string): string;
     get_m_linearEnableSpring(): string;	set_m_linearEnableSpring(value: string): string;
     get_m_linearSpringStiffnessLimited(): string;	set_m_linearSpringStiffnessLimited(value: string): string;
-    get_m_linearSpringDampingLimited(): string;	set_m_linearSpringDampingLimited(value: string): string;
+    get_m_rbAFrame(): btTransformFloatData;	set_m_rbAFrame(value: btTransformFloatData): btTransformFloatData;
     get_m_padding1(): string;	set_m_padding1(value: string): string;
     get_m_angularUpperLimit(): btVector3FloatData;	set_m_angularUpperLimit(value: btVector3FloatData): btVector3FloatData;
     get_m_angularLowerLimit(): btVector3FloatData;	set_m_angularLowerLimit(value: btVector3FloatData): btVector3FloatData;
@@ -41,5 +42,6 @@ declare module Ammo {
     get_m_angularSpringStiffnessLimited(): string;	set_m_angularSpringStiffnessLimited(value: string): string;
     get_m_angularSpringDampingLimited(): string;	set_m_angularSpringDampingLimited(value: string): string;
     get_m_rotateOrder(): number;	set_m_rotateOrder(value: number): number;
+
   }
 }

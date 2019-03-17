@@ -2,31 +2,33 @@ declare module Ammo {
   declare class btGImpactMeshShapePart {
     constructor();
     constructor(meshInterface: btStridingMeshInterface, part: number);
+
+
     childrenHasTransform(): boolean;
-    lockChildShapes(): void;
-    unlockChildShapes(): void;
+    calculateLocalInertia(mass: number, inertia: btVector3): void;
+    getLocalScaling(): btVector3;
     getNumChildShapes(): number;
     getChildShape(index: number): btCollisionShape;
     getChildShape(index: number): btCollisionShape;
     getChildTransform(index: number): btTransform;
-    setChildTransform(index: number, transform: btTransform): void;
+    getMargin(): number;
     getPrimitiveManager(): btPrimitiveManagerBase;
     getTrimeshPrimitiveManager(): TrimeshPrimitiveManager;
-    calculateLocalInertia(mass: number, inertia: btVector3): void;
-    getName(): string;
     getGImpactShapeType(): eGIMPACT_SHAPE_TYPE;
-    needsRetrieveTriangles(): boolean;
-    needsRetrieveTetrahedrons(): boolean;
+    getName(): string;
+    getPart(): number;
+    getVertex(vertex_index: number, vertex: btVector3): void;
+    getVertexCount(): number;
     getBulletTriangle(prim_index: number, triangle: btTriangleShapeEx): void;
     getBulletTetrahedron(prim_index: number, tetrahedron: btTetrahedronShapeEx): void;
-    getVertexCount(): number;
-    getVertex(vertex_index: number, vertex: btVector3): void;
-    setMargin(margin: number): void;
-    getMargin(): number;
-    setLocalScaling(scaling: btVector3): void;
-    getLocalScaling(): btVector3;
-    getPart(): number;
+    lockChildShapes(): void;
+    needsRetrieveTetrahedrons(): boolean;
+    needsRetrieveTriangles(): boolean;
     processAllTriangles(callback: btTriangleCallback, aabbMin: btVector3, aabbMax: btVector3): void;
     processAllTrianglesRay(callback: btTriangleCallback, rayFrom: btVector3, rayTo: btVector3): void;
+    setMargin(margin: number): void;
+    setChildTransform(index: number, transform: btTransform): void;
+    setLocalScaling(scaling: btVector3): void;
+    unlockChildShapes(): void;
   }
 }

@@ -1,21 +1,23 @@
 declare module Ammo {
   declare class btSimpleDynamicsWorld {
     constructor(dispatcher: btDispatcher, pairCache: btBroadphaseInterface, constraintSolver: btConstraintSolver, collisionConfiguration: btCollisionConfiguration);
-    stepSimulation(timeStep: number, maxSubSteps: number, fixedTimeStep: number): number;
-    setGravity(gravity: btVector3): void;
-    getGravity(): btVector3;
-    addRigidBody(body: btRigidBody): void;
-    addRigidBody(body: btRigidBody, group: number, mask: number): void;
-    removeRigidBody(body: btRigidBody): void;
-    debugDrawWorld(): void;
+
+
     addAction(action: btActionInterface): void;
+    addRigidBody(body: btRigidBody, group: number, mask: number): void;
+    addRigidBody(body: btRigidBody): void;
+    clearForces(): void;
+    debugDrawWorld(): void;
+    getWorldType(): btDynamicsWorldType;
+    getGravity(): btVector3;
+    getConstraintSolver(): btConstraintSolver;
     removeAction(action: btActionInterface): void;
+    removeRigidBody(body: btRigidBody): void;
     removeCollisionObject(collisionObject: btCollisionObject): void;
-    updateAabbs(): void;
+    setGravity(gravity: btVector3): void;
     synchronizeMotionStates(): void;
     setConstraintSolver(solver: btConstraintSolver): void;
-    getConstraintSolver(): btConstraintSolver;
-    getWorldType(): btDynamicsWorldType;
-    clearForces(): void;
+    stepSimulation(timeStep: number, maxSubSteps: number, fixedTimeStep: number): number;
+    updateAabbs(): void;
   }
 }

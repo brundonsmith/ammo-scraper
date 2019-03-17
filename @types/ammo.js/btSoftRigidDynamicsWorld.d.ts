@@ -1,19 +1,21 @@
 declare module Ammo {
   declare class btSoftRigidDynamicsWorld {
     constructor(dispatcher: btDispatcher, pairCache: btBroadphaseInterface, constraintSolver: btConstraintSolver, collisionConfiguration: btCollisionConfiguration, softBodySolver: btSoftBodySolver);
-    debugDrawWorld(): void;
+
+    get_void(): static;	set_void(value: static): static;
+
     addSoftBody(body: btSoftBody, collisionFilterGroup: number, collisionFilterMask: number): void;
-    removeSoftBody(body: btSoftBody): void;
-    removeCollisionObject(collisionObject: btCollisionObject): void;
+    debugDrawWorld(): void;
+    getSoftBodyArray(): btSoftBodyArray;
     getDrawFlags(): number;
-    setDrawFlags(f: number): void;
-    getWorldInfo(): btSoftBodyWorldInfo;
+    getSoftBodyArray(): btSoftBodyArray;
     getWorldInfo(): btSoftBodyWorldInfo;
     getWorldType(): btDynamicsWorldType;
-    getSoftBodyArray(): btSoftBodyArray;
-    getSoftBodyArray(): btSoftBodyArray;
+    getWorldInfo(): btSoftBodyWorldInfo;
+    removeSoftBody(body: btSoftBody): void;
+    removeCollisionObject(collisionObject: btCollisionObject): void;
     rayTest(rayFromWorld: btVector3, rayToWorld: btVector3, resultCallback: RayResultCallback): void;
+    setDrawFlags(f: number): void;
     serialize(serializer: btSerializer): void;
-    get_void(): static;	set_void(value: static): static;
   }
 }

@@ -51,6 +51,7 @@ function scrapeClass($) {
             !decl.match(/~[a-z0-9_:]+[\s]+\(/gi))
         .map(parseMember)
         .filter(member => member != null)
+        .sort((a, b) => scoreMember(a) - scoreMember(b))
 
     return {
         name,
@@ -58,8 +59,33 @@ function scrapeClass($) {
     }
 }
 
+function scoreMember(member) {
+    let score = 0;
+
+    switch(member.kind) {
+        case 'constructor':
+            break;
+        case 'property':
+            score += 10000000;
+            break
+        case 'method':
+            score += 20000000;
+            break;
+    }
+
+    if(member.name) {
+        score += member.name.charCodeAt(0) * 1000;
+    }
+
+    if(member.args != null) {
+        score += 100 - member.args.length;
+    }
+
+    return score;
+}
+
 function parseMember(member) {
-    let methodExp = /^(?:const |virtual |unsigned )*([a-z0-9_:]+)[\s]+[*&]?[\s]*\*?[\s]*([a-z0-9_:]+)[\s]+\(([^)]*)\)(?:=.*)?/gi
+    let methodExp = /^(?:const |virtual |unsigned )*([a-z0-9_:]+)[\s]+[*&]*[\s]*\*?[\s]*([a-z0-9_:]+)[\s]+\(([^)]*)\)(?:=.*)?/gi
     let result = methodExp.exec(member);
     if(result != null) {
         return {
@@ -70,7 +96,7 @@ function parseMember(member) {
         }
     } 
 
-    let constructorExp = /^(?:const |virtual |unsigned )*[\s]*[*&]?[\s]*\*?[\s]*([a-z0-9_:]+)[\s]+\((.*)\)$/gi
+    let constructorExp = /^(?:const |virtual |unsigned )*[\s]*[*&]*[\s]*\*?[\s]*([a-z0-9_:]+)[\s]+\((.*)\)$/gi
     result = constructorExp.exec(member);
     if(result != null) {
         let argsArray = [];
@@ -92,7 +118,7 @@ function parseMember(member) {
         }
     }
 
-    let propertyExp = /^(?:const |unsigned )*([a-z0-9_:]*)[\s]*[*&]?[\s]*\*?[\s]*([a-z0-9_:]+)/gi
+    let propertyExp = /^(?:const |unsigned )*([a-z0-9_:]*)[\s]*[*&]*[\s]*\*?[\s]*([a-z0-9_:]+)/gi
     result = propertyExp.exec(member);
     if(result != null) {
         return {
@@ -123,7 +149,7 @@ function parseArg(arg) {
 }
 
 const argExpression = () => 
-    /(?:const |class |unsigned |short )*([a-z_][a-z0-9_:]*)[\s]*[*&]?([a-z0-9_]+)(?:=[a-z0-9_:]+\([^\)]*\)|=[^,]*)?(?:, )?/gi
+    /(?:const |class |unsigned |short )*([a-z_][a-z0-9_:]*)[\s]*[*&]*([a-z0-9_]+)(?:=[a-z0-9_:]+\([^\)]*\)|=[^,]*)?(?:, )?/gi
     //                                          type             *&      name       =...                              ,
     
 // serialize
@@ -132,7 +158,11 @@ function serializeClass(clazz) {
 
     decl += `declare module Ammo {\n`;
     decl += `  declare class ${convertIdentifier(clazz.name)} {\n`;
-    decl += clazz.members.map(member => '    ' + serializeMember(member) + '\n').join('')
+    decl += clazz.members.filter(m => m.kind === 'constructor').map(member => '    ' + serializeMember(member) + '\n').join('')
+    decl += '\n';
+    decl += clazz.members.filter(m => m.kind === 'property').map(member => '    ' + serializeMember(member) + '\n').join('')
+    decl += '\n';
+    decl += clazz.members.filter(m => m.kind === 'method').map(member => '    ' + serializeMember(member) + '\n').join('')
     decl += `  }\n`
     decl += `}\n`;
 
@@ -183,4 +213,3 @@ function convertType(type) {
             return type;
     }
 }
-

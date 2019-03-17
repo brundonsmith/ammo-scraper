@@ -1,19 +1,21 @@
 declare module Ammo {
   declare class btMultiBodyGearConstraint {
     constructor(bodyA: btMultiBody, linkA: number, bodyB: btMultiBody, linkB: number, pivotInA: btVector3, pivotInB: btVector3, frameInA: btMatrix3x3, frameInB: btMatrix3x3);
-    finalizeMultiDof(): void;
-    getIslandIdA(): number;
-    getIslandIdB(): number;
+
+
     createConstraintRows(constraintRows: btMultiBodyConstraintArray, data: btMultiBodyJacobianData, infoGlobal: btContactSolverInfo): void;
-    getPivotInA(): btVector3;
-    setPivotInA(pivotInA: btVector3): void;
-    getPivotInB(): btVector3;
-    setPivotInB(pivotInB: btVector3): void;
-    getFrameInA(): btMatrix3x3;
-    setFrameInA(frameInA: btMatrix3x3): void;
-    getFrameInB(): btMatrix3x3;
-    setFrameInB(frameInB: btMatrix3x3): void;
     debugDraw(drawer: btIDebugDraw): void;
+    finalizeMultiDof(): void;
+    getFrameInA(): btMatrix3x3;
+    getPivotInA(): btVector3;
+    getIslandIdA(): number;
+    getPivotInB(): btVector3;
+    getFrameInB(): btMatrix3x3;
+    getIslandIdB(): number;
+    setFrameInA(frameInA: btMatrix3x3): void;
+    setPivotInB(pivotInB: btVector3): void;
+    setFrameInB(frameInB: btMatrix3x3): void;
+    setPivotInA(pivotInA: btVector3): void;
     setGearRatio(gearRatio: number): void;
     setGearAuxLink(gearAuxLink: number): void;
     setRelativePositionTarget(relPosTarget: number): void;

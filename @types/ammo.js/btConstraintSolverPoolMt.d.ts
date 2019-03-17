@@ -1,9 +1,11 @@
 declare module Ammo {
   declare class btConstraintSolverPoolMt {
     constructor(numSolvers: number);
-    constructor(r: btConstraintSolve, s: solver, numSolvers: number);
-    solveGroup(t: btCollisionObjec, numBodies: number, d: btPersistentManifol, numManifolds: number, t: btTypedConstrain, numConstraints: number, info: btContactSolverInfo, debugDrawer: btIDebugDraw, dispatcher: btDispatcher): number;
-    reset(): void;
+    constructor(solvers: btConstraintSolver, numSolvers: number);
+
+
     getSolverType(): btConstraintSolverType;
+    reset(): void;
+    solveGroup(bodies: btCollisionObject, numBodies: number, manifolds: btPersistentManifold, numManifolds: number, constraints: btTypedConstraint, numConstraints: number, info: btContactSolverInfo, debugDrawer: btIDebugDraw, dispatcher: btDispatcher): number;
   }
 }

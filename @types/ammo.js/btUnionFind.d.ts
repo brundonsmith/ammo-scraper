@@ -1,16 +1,18 @@
 declare module Ammo {
   declare class btUnionFind {
     constructor();
-    sortIslands(): void;
-    reset(N: number): void;
-    getNumElements(): number;
-    isRoot(x: number): boolean;
-    getElement(index: number): btElement;
-    getElement(index: number): btElement;
-    allocate(N: number): void;
+
+
     Free(): void;
-    find(p: number, q: number): number;
-    unite(p: number, q: number): void;
+    allocate(N: number): void;
     find(x: number): number;
+    find(p: number, q: number): number;
+    getElement(index: number): btElement;
+    getNumElements(): number;
+    getElement(index: number): btElement;
+    isRoot(x: number): boolean;
+    reset(N: number): void;
+    sortIslands(): void;
+    unite(p: number, q: number): void;
   }
 }

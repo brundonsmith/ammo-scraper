@@ -1,7 +1,8 @@
 declare module Ammo {
   declare class btPersistentManifoldFloatData {
+
+    get_m_pointCacheAppliedImpulseLateral2(): number;	set_m_pointCacheAppliedImpulseLateral2(value: number): number;
     get_m_pointCacheLocalPointA(): btVector3FloatData;	set_m_pointCacheLocalPointA(value: btVector3FloatData): btVector3FloatData;
-    get_m_pointCacheLocalPointB(): btVector3FloatData;	set_m_pointCacheLocalPointB(value: btVector3FloatData): btVector3FloatData;
     get_m_pointCachePositionWorldOnA(): btVector3FloatData;	set_m_pointCachePositionWorldOnA(value: btVector3FloatData): btVector3FloatData;
     get_m_pointCachePositionWorldOnB(): btVector3FloatData;	set_m_pointCachePositionWorldOnB(value: btVector3FloatData): btVector3FloatData;
     get_m_pointCacheNormalWorldOnB(): btVector3FloatData;	set_m_pointCacheNormalWorldOnB(value: btVector3FloatData): btVector3FloatData;
@@ -19,7 +20,7 @@ declare module Ammo {
     get_m_pointCacheIndex1(): number;	set_m_pointCacheIndex1(value: number): number;
     get_m_pointCacheContactPointFlags(): number;	set_m_pointCacheContactPointFlags(value: number): number;
     get_m_pointCacheAppliedImpulseLateral1(): number;	set_m_pointCacheAppliedImpulseLateral1(value: number): number;
-    get_m_pointCacheAppliedImpulseLateral2(): number;	set_m_pointCacheAppliedImpulseLateral2(value: number): number;
+    get_m_pointCacheLocalPointB(): btVector3FloatData;	set_m_pointCacheLocalPointB(value: btVector3FloatData): btVector3FloatData;
     get_m_pointCacheContactMotion1(): number;	set_m_pointCacheContactMotion1(value: number): number;
     get_m_pointCacheContactMotion2(): number;	set_m_pointCacheContactMotion2(value: number): number;
     get_m_pointCacheContactCFM(): number;	set_m_pointCacheContactCFM(value: number): number;
@@ -38,5 +39,6 @@ declare module Ammo {
     get_m_padding(): number;	set_m_padding(value: number): number;
     get_m_body0(): btCollisionObjectFloatData;	set_m_body0(value: btCollisionObjectFloatData): btCollisionObjectFloatData;
     get_m_body1(): btCollisionObjectFloatData;	set_m_body1(value: btCollisionObjectFloatData): btCollisionObjectFloatData;
+
   }
 }

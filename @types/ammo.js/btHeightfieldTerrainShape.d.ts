@@ -1,15 +1,17 @@
 declare module Ammo {
   declare class btHeightfieldTerrainShape {
     constructor();
-    constructor(heightStickWidth: number, heightStickLength: number, heightfieldData: void, heightScale: number, minHeight: number, maxHeight: number, upAxis: number, heightDataType: PHY_ScalarType, flipQuadEdges: boolean);
     constructor(heightStickWidth: number, heightStickLength: number, heightfieldData: void, maxHeight: number, upAxis: number, useFloatData: boolean, flipQuadEdges: boolean);
-    setUseDiamondSubdivision(useDiamondSubdivision: boolean): void;
-    setUseZigzagSubdivision(useZigzagSubdivision: boolean): void;
+    constructor(heightStickWidth: number, heightStickLength: number, heightfieldData: void, heightScale: number, minHeight: number, maxHeight: number, upAxis: number, heightDataType: PHY_ScalarType, flipQuadEdges: boolean);
+
+
+    calculateLocalInertia(mass: number, inertia: btVector3): void;
+    getName(): string;
+    getLocalScaling(): btVector3;
     getAabb(t: btTransform, aabbMin: btVector3, aabbMax: btVector3): void;
     processAllTriangles(callback: btTriangleCallback, aabbMin: btVector3, aabbMax: btVector3): void;
-    calculateLocalInertia(mass: number, inertia: btVector3): void;
+    setUseZigzagSubdivision(useZigzagSubdivision: boolean): void;
     setLocalScaling(scaling: btVector3): void;
-    getLocalScaling(): btVector3;
-    getName(): string;
+    setUseDiamondSubdivision(useDiamondSubdivision: boolean): void;
   }
 }

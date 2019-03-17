@@ -1,5 +1,6 @@
 declare module Ammo {
   declare class btSoftBody_Pose {
+
     get_m_bvolume(): boolean;	set_m_bvolume(value: boolean): boolean;
     get_m_bframe(): boolean;	set_m_bframe(value: boolean): boolean;
     get_m_volume(): number;	set_m_volume(value: number): number;
@@ -9,5 +10,6 @@ declare module Ammo {
     get_m_rot(): btMatrix3x3;	set_m_rot(value: btMatrix3x3): btMatrix3x3;
     get_m_scl(): btMatrix3x3;	set_m_scl(value: btMatrix3x3): btMatrix3x3;
     get_m_aqq(): btMatrix3x3;	set_m_aqq(value: btMatrix3x3): btMatrix3x3;
+
   }
 }

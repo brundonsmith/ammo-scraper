@@ -2,6 +2,8 @@ declare module Ammo {
   declare class btUniversalConstraint {
     constructor();
     constructor(rbA: btRigidBody, rbB: btRigidBody, anchor: btVector3, axis1: btVector3, axis2: btVector3);
+
+
     getAnchor(): btVector3;
     getAnchor2(): btVector3;
     getAxis1(): btVector3;

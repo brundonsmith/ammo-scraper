@@ -1,7 +1,8 @@
 declare module Ammo {
   declare class Bullet_btGeneric6DofSpring2ConstraintDoubleData2 {
+
+    get_m_linearSpringDampingLimited(): string;	set_m_linearSpringDampingLimited(value: string): string;
     get_m_typeConstraintData(): btTypedConstraintDoubleData;	set_m_typeConstraintData(value: btTypedConstraintDoubleData): btTypedConstraintDoubleData;
-    get_m_rbAFrame(): btTransformDoubleData;	set_m_rbAFrame(value: btTransformDoubleData): btTransformDoubleData;
     get_m_rbBFrame(): btTransformDoubleData;	set_m_rbBFrame(value: btTransformDoubleData): btTransformDoubleData;
     get_m_linearUpperLimit(): btVector3DoubleData;	set_m_linearUpperLimit(value: btVector3DoubleData): btVector3DoubleData;
     get_m_linearLowerLimit(): btVector3DoubleData;	set_m_linearLowerLimit(value: btVector3DoubleData): btVector3DoubleData;
@@ -20,7 +21,7 @@ declare module Ammo {
     get_m_linearServoMotor(): string;	set_m_linearServoMotor(value: string): string;
     get_m_linearEnableSpring(): string;	set_m_linearEnableSpring(value: string): string;
     get_m_linearSpringStiffnessLimited(): string;	set_m_linearSpringStiffnessLimited(value: string): string;
-    get_m_linearSpringDampingLimited(): string;	set_m_linearSpringDampingLimited(value: string): string;
+    get_m_rbAFrame(): btTransformDoubleData;	set_m_rbAFrame(value: btTransformDoubleData): btTransformDoubleData;
     get_m_padding1(): string;	set_m_padding1(value: string): string;
     get_m_angularUpperLimit(): btVector3DoubleData;	set_m_angularUpperLimit(value: btVector3DoubleData): btVector3DoubleData;
     get_m_angularLowerLimit(): btVector3DoubleData;	set_m_angularLowerLimit(value: btVector3DoubleData): btVector3DoubleData;
@@ -41,5 +42,6 @@ declare module Ammo {
     get_m_angularSpringStiffnessLimited(): string;	set_m_angularSpringStiffnessLimited(value: string): string;
     get_m_angularSpringDampingLimited(): string;	set_m_angularSpringDampingLimited(value: string): string;
     get_m_rotateOrder(): number;	set_m_rotateOrder(value: number): number;
+
   }
 }

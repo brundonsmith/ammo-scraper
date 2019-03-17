@@ -2,6 +2,8 @@ declare module Ammo {
   declare class btGEN_Link {
     constructor();
     constructor(next: btGEN_Link, prev: btGEN_Link);
+
+
     getNext(): btGEN_Link;
     getPrev(): btGEN_Link;
     isHead(): boolean;

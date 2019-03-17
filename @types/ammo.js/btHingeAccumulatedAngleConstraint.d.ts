@@ -5,8 +5,10 @@ declare module Ammo {
     constructor(rbA: btRigidBody, pivotInA: btVector3, axisInA: btVector3, useReferenceFrameA: boolean);
     constructor(rbA: btRigidBody, rbB: btRigidBody, rbAFrame: btTransform, rbBFrame: btTransform, useReferenceFrameA: boolean);
     constructor(rbA: btRigidBody, rbAFrame: btTransform, useReferenceFrameA: boolean);
+
+
     getAccumulatedHingeAngle(): number;
-    setAccumulatedHingeAngle(accAngle: number): void;
     getInfo1(info: btConstraintInfo1): void;
+    setAccumulatedHingeAngle(accAngle: number): void;
   }
 }

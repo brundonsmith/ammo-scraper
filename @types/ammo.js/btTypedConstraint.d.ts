@@ -1,45 +1,47 @@
 declare module Ammo {
   declare class btTypedConstraint {
     constructor();
-    constructor(type: btTypedConstraintType, rbA: btRigidBody);
     constructor(type: btTypedConstraintType, rbA: btRigidBody, rbB: btRigidBody);
-    getOverrideNumSolverIterations(): number;
-    setOverrideNumSolverIterations(overideNumIterations: number): void;
+    constructor(type: btTypedConstraintType, rbA: btRigidBody);
+
+    get_btRigidBody(): static;	set_btRigidBody(value: static): static;
+
     buildJacobian(): void;
-    setupSolverConstraint(ca: btConstraintArray, solverBodyA: number, solverBodyB: number, timeStep: number): void;
-    getInfo1(info: btConstraintInfo1): void;
-    getInfo2(info: btConstraintInfo2): void;
-    internalSetAppliedImpulse(appliedImpulse: number): void;
-    internalGetAppliedImpulse(): number;
-    getBreakingImpulseThreshold(): number;
-    setBreakingImpulseThreshold(threshold: number): void;
-    isEnabled(): boolean;
-    setEnabled(enabled: boolean): void;
-    solveConstraintObsolete(y: btSolverBod, y: btSolverBod, r: btScala): void;
-    getRigidBodyA(): btRigidBody;
-    getRigidBodyB(): btRigidBody;
-    getRigidBodyA(): btRigidBody;
-    getRigidBodyB(): btRigidBody;
-    getUserConstraintType(): number;
-    setUserConstraintType(userConstraintType: number): void;
-    setUserConstraintId(uid: number): void;
+    calculateSerializeBufferSize(): number;
+    enableFeedback(needsFeedback: boolean): void;
     getUserConstraintId(): number;
-    setUserConstraintPtr(ptr: void): void;
+    getParam(num: number, axis: number): number;
+    getBreakingImpulseThreshold(): number;
+    getDbgDrawSize(): number;
+    getRigidBodyA(): btRigidBody;
+    getRigidBodyB(): btRigidBody;
+    getRigidBodyA(): btRigidBody;
+    getRigidBodyB(): btRigidBody;
+    getOverrideNumSolverIterations(): number;
+    getInfo1(info: btConstraintInfo1): void;
+    getConstraintType(): btTypedConstraintType;
     getUserConstraintPtr(): void;
-    setJointFeedback(jointFeedback: btJointFeedback): void;
     getJointFeedback(): btJointFeedback;
     getJointFeedback(): btJointFeedback;
     getUid(): number;
-    needsFeedback(): boolean;
-    enableFeedback(needsFeedback: boolean): void;
     getAppliedImpulse(): number;
-    getConstraintType(): btTypedConstraintType;
+    getInfo2(info: btConstraintInfo2): void;
+    getUserConstraintType(): number;
+    internalSetAppliedImpulse(appliedImpulse: number): void;
+    isEnabled(): boolean;
+    internalGetAppliedImpulse(): number;
+    needsFeedback(): boolean;
+    setUserConstraintType(userConstraintType: number): void;
+    setOverrideNumSolverIterations(overideNumIterations: number): void;
+    setBreakingImpulseThreshold(threshold: number): void;
+    setUserConstraintPtr(ptr: void): void;
+    setupSolverConstraint(ca: btConstraintArray, solverBodyA: number, solverBodyB: number, timeStep: number): void;
     setDbgDrawSize(dbgDrawSize: number): void;
-    getDbgDrawSize(): number;
+    setJointFeedback(jointFeedback: btJointFeedback): void;
     setParam(num: number, value: number, axis: number): void;
-    getParam(num: number, axis: number): number;
-    calculateSerializeBufferSize(): number;
+    setEnabled(enabled: boolean): void;
+    solveConstraintObsolete(y: btSolverBod, y: btSolverBod, r: btScala): void;
     serialize(dataBuffer: void, serializer: btSerializer): string;
-    get_btRigidBody(): static;	set_btRigidBody(value: static): static;
+    setUserConstraintId(uid: number): void;
   }
 }

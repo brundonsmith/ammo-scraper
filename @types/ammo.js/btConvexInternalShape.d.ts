@@ -1,22 +1,24 @@
 declare module Ammo {
   declare class btConvexInternalShape {
     constructor();
-    localGetSupportingVertex(vec: btVector3): btVector3;
+
+
+    calculateSerializeBufferSize(): number;
     getImplicitShapeDimensions(): btVector3;
-    setImplicitShapeDimensions(dimensions: btVector3): void;
-    setSafeMargin(minDimension: number, defaultMarginMultiplier: number): void;
-    setSafeMargin(halfExtents: btVector3, defaultMarginMultiplier: number): void;
+    getLocalScaling(): btVector3;
+    getPreferredPenetrationDirection(index: number, penetrationVector: btVector3): void;
+    getNumPreferredPenetrationDirections(): number;
     getAabb(t: btTransform, aabbMin: btVector3, aabbMax: btVector3): void;
     getAabbSlow(t: btTransform, aabbMin: btVector3, aabbMax: btVector3): void;
-    setLocalScaling(scaling: btVector3): void;
-    getLocalScaling(): btVector3;
-    getLocalScalingNV(): btVector3;
-    setMargin(margin: number): void;
-    getMargin(): number;
     getMarginNV(): number;
-    getNumPreferredPenetrationDirections(): number;
-    getPreferredPenetrationDirection(index: number, penetrationVector: btVector3): void;
-    calculateSerializeBufferSize(): number;
+    getMargin(): number;
+    getLocalScalingNV(): btVector3;
+    localGetSupportingVertex(vec: btVector3): btVector3;
+    setMargin(margin: number): void;
+    setLocalScaling(scaling: btVector3): void;
+    setSafeMargin(halfExtents: btVector3, defaultMarginMultiplier: number): void;
+    setSafeMargin(minDimension: number, defaultMarginMultiplier: number): void;
+    setImplicitShapeDimensions(dimensions: btVector3): void;
     serialize(dataBuffer: void, serializer: btSerializer): string;
   }
 }

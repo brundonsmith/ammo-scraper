@@ -1,7 +1,8 @@
 declare module Ammo {
   declare class btContactSolverInfoData {
+
+    get_m_frictionCFM(): number;	set_m_frictionCFM(value: number): number;
     get_m_tau(): number;	set_m_tau(value: number): number;
-    get_m_damping(): number;	set_m_damping(value: number): number;
     get_m_friction(): number;	set_m_friction(value: number): number;
     get_m_timeStep(): number;	set_m_timeStep(value: number): number;
     get_m_restitution(): number;	set_m_restitution(value: number): number;
@@ -12,7 +13,7 @@ declare module Ammo {
     get_m_erp2(): number;	set_m_erp2(value: number): number;
     get_m_globalCfm(): number;	set_m_globalCfm(value: number): number;
     get_m_frictionERP(): number;	set_m_frictionERP(value: number): number;
-    get_m_frictionCFM(): number;	set_m_frictionCFM(value: number): number;
+    get_m_damping(): number;	set_m_damping(value: number): number;
     get_m_splitImpulse(): number;	set_m_splitImpulse(value: number): number;
     get_m_splitImpulsePenetrationThreshold(): number;	set_m_splitImpulsePenetrationThreshold(value: number): number;
     get_m_splitImpulseTurnErp(): number;	set_m_splitImpulseTurnErp(value: number): number;
@@ -25,5 +26,6 @@ declare module Ammo {
     get_m_singleAxisRollingFrictionThreshold(): number;	set_m_singleAxisRollingFrictionThreshold(value: number): number;
     get_m_leastSquaresResidualThreshold(): number;	set_m_leastSquaresResidualThreshold(value: number): number;
     get_m_restitutionVelocityThreshold(): number;	set_m_restitutionVelocityThreshold(value: number): number;
+
   }
 }

@@ -1,5 +1,7 @@
 declare module Ammo {
   declare class btSimulationIslandManager_IslandCallback {
-    processIsland(t: btCollisionObjec, numBodies: number, d: btPersistentManifol, numManifolds: number, islandId: number): void;
+
+
+    processIsland(bodies: btCollisionObject, numBodies: number, manifolds: btPersistentManifold, numManifolds: number, islandId: number): void;
   }
 }

@@ -1,6 +1,8 @@
 declare module Ammo {
   declare class Bullet_btShortIntIndexTripletData {
+
     get_m_values(): short;	set_m_values(value: short): short;
     get_m_pad(): string;	set_m_pad(value: string): string;
+
   }
 }

@@ -1,9 +1,9 @@
 declare module Ammo {
   declare class btBroadphaseProxy {
     constructor();
-    getUid(): number;
     constructor();
     constructor(aabbMin: btVector3, aabbMax: btVector3, userPtr: void, collisionFilterGroup: number, collisionFilterMask: number);
+
     get_bool(): static;	set_bool(value: static): static;
     get_bool(): static;	set_bool(value: static): static;
     get_bool(): static;	set_bool(value: static): static;
@@ -18,5 +18,7 @@ declare module Ammo {
     get_m_uniqueId(): number;	set_m_uniqueId(value: number): number;
     get_m_aabbMin(): btVector3;	set_m_aabbMin(value: btVector3): btVector3;
     get_m_aabbMax(): btVector3;	set_m_aabbMax(value: btVector3): btVector3;
+
+    getUid(): number;
   }
 }

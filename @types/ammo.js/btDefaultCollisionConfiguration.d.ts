@@ -1,6 +1,8 @@
 declare module Ammo {
   declare class btDefaultCollisionConfiguration {
     constructor(constructionInfo: btDefaultCollisionConstructionInfo);
+
+
     getPersistentManifoldPool(): btPoolAllocator;
     getCollisionAlgorithmPool(): btPoolAllocator;
     getCollisionAlgorithmCreateFunc(proxyType0: number, proxyType1: number): btCollisionAlgorithmCreateFunc;

@@ -2,22 +2,24 @@ declare module Ammo {
   declare class btSequentialImpulseConstraintSolver {
     constructor();
     constructor();
-    solveGroup(t: btCollisionObjec, numBodies: number, d: btPersistentManifol, numManifolds: number, t: btTypedConstrain, numConstraints: number, info: btContactSolverInfo, debugDrawer: btIDebugDraw, dispatcher: btDispatcher): number;
-    reset(): void;
+
+
     btRand2(): number;
     btRandInt2(n: number): number;
-    setRandSeed(seed: number): void;
+    getSSE4_1ConstraintRowSolverLowerLimit(): btSingleConstraintRowSolver;
+    getSSE2ConstraintRowSolverLowerLimit(): btSingleConstraintRowSolver;
+    getSSE4_1ConstraintRowSolverGeneric(): btSingleConstraintRowSolver;
     getRandSeed(): number;
     getSolverType(): btConstraintSolverType;
-    getActiveConstraintRowSolverGeneric(): btSingleConstraintRowSolver;
-    setConstraintRowSolverGeneric(rowSolver: btSingleConstraintRowSolver): void;
-    getActiveConstraintRowSolverLowerLimit(): btSingleConstraintRowSolver;
-    setConstraintRowSolverLowerLimit(rowSolver: btSingleConstraintRowSolver): void;
-    getScalarConstraintRowSolverGeneric(): btSingleConstraintRowSolver;
-    getSSE2ConstraintRowSolverGeneric(): btSingleConstraintRowSolver;
-    getSSE4_1ConstraintRowSolverGeneric(): btSingleConstraintRowSolver;
     getScalarConstraintRowSolverLowerLimit(): btSingleConstraintRowSolver;
-    getSSE2ConstraintRowSolverLowerLimit(): btSingleConstraintRowSolver;
-    getSSE4_1ConstraintRowSolverLowerLimit(): btSingleConstraintRowSolver;
+    getSSE2ConstraintRowSolverGeneric(): btSingleConstraintRowSolver;
+    getActiveConstraintRowSolverLowerLimit(): btSingleConstraintRowSolver;
+    getScalarConstraintRowSolverGeneric(): btSingleConstraintRowSolver;
+    getActiveConstraintRowSolverGeneric(): btSingleConstraintRowSolver;
+    reset(): void;
+    setConstraintRowSolverLowerLimit(rowSolver: btSingleConstraintRowSolver): void;
+    setConstraintRowSolverGeneric(rowSolver: btSingleConstraintRowSolver): void;
+    setRandSeed(seed: number): void;
+    solveGroup(bodies: btCollisionObject, numBodies: number, manifold: btPersistentManifold, numManifolds: number, constraints: btTypedConstraint, numConstraints: number, info: btContactSolverInfo, debugDrawer: btIDebugDraw, dispatcher: btDispatcher): number;
   }
 }

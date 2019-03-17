@@ -1,9 +1,10 @@
 declare module Ammo {
   declare class btWheelInfo {
-    getSuspensionRestLength(): number;
-    constructor();
     constructor(ci: btWheelInfoConstructionInfo);
-    updateWheel(chassis: btRigidBody, raycastInfo: RaycastInfo): void;
+    constructor();
+
+    get_m_wheelsDampingRelaxation(): number;	set_m_wheelsDampingRelaxation(value: number): number;
+    get_m_wheelsSuspensionForce(): number;	set_m_wheelsSuspensionForce(value: number): number;
     get_m_raycastInfo(): RaycastInfo;	set_m_raycastInfo(value: RaycastInfo): RaycastInfo;
     get_m_worldTransform(): btTransform;	set_m_worldTransform(value: btTransform): btTransform;
     get_m_chassisConnectionPointCS(): btVector3;	set_m_chassisConnectionPointCS(value: btVector3): btVector3;
@@ -14,7 +15,7 @@ declare module Ammo {
     get_m_wheelsRadius(): number;	set_m_wheelsRadius(value: number): number;
     get_m_suspensionStiffness(): number;	set_m_suspensionStiffness(value: number): number;
     get_m_wheelsDampingCompression(): number;	set_m_wheelsDampingCompression(value: number): number;
-    get_m_wheelsDampingRelaxation(): number;	set_m_wheelsDampingRelaxation(value: number): number;
+    get_m_skidInfo(): number;	set_m_skidInfo(value: number): number;
     get_m_frictionSlip(): number;	set_m_frictionSlip(value: number): number;
     get_m_steering(): number;	set_m_steering(value: number): number;
     get_m_rotation(): number;	set_m_rotation(value: number): number;
@@ -27,7 +28,8 @@ declare module Ammo {
     get_m_clientInfo(): void;	set_m_clientInfo(value: void): void;
     get_m_clippedInvContactDotSuspension(): number;	set_m_clippedInvContactDotSuspension(value: number): number;
     get_m_suspensionRelativeVelocity(): number;	set_m_suspensionRelativeVelocity(value: number): number;
-    get_m_wheelsSuspensionForce(): number;	set_m_wheelsSuspensionForce(value: number): number;
-    get_m_skidInfo(): number;	set_m_skidInfo(value: number): number;
+
+    getSuspensionRestLength(): number;
+    updateWheel(chassis: btRigidBody, raycastInfo: RaycastInfo): void;
   }
 }

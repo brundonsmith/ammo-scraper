@@ -1,8 +1,10 @@
 declare module Ammo {
   declare class btHashKey< {
     constructor(uid: number);
-    getUid1(): number;
+
+
     equals(y: btHashKe): boolean;
+    getUid1(): number;
     getHash(): number;
   }
 }

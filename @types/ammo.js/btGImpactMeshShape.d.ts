@@ -1,35 +1,37 @@
 declare module Ammo {
   declare class btGImpactMeshShape {
     constructor(meshInterface: btStridingMeshInterface);
-    getMeshInterface(): btStridingMeshInterface;
-    getMeshInterface(): btStridingMeshInterface;
-    getMeshPartCount(): number;
-    getMeshPart(index: number): btGImpactMeshShapePart;
-    getMeshPart(index: number): btGImpactMeshShapePart;
-    setLocalScaling(scaling: btVector3): void;
-    setMargin(margin: number): void;
-    postUpdate(): void;
+
+
+    calculateSerializeBufferSize(): number;
     calculateLocalInertia(mass: number, inertia: btVector3): void;
+    childrenHasTransform(): boolean;
+    getMeshPart(index: number): btGImpactMeshShapePart;
+    getMeshPart(index: number): btGImpactMeshShapePart;
+    getBulletTriangle(prim_index: number, triangle: btTriangleShapeEx): void;
+    getName(): string;
+    getGImpactShapeType(): eGIMPACT_SHAPE_TYPE;
+    getMeshInterface(): btStridingMeshInterface;
     getPrimitiveManager(): btPrimitiveManagerBase;
     getNumChildShapes(): number;
-    childrenHasTransform(): boolean;
-    needsRetrieveTriangles(): boolean;
-    needsRetrieveTetrahedrons(): boolean;
-    getBulletTriangle(prim_index: number, triangle: btTriangleShapeEx): void;
-    getBulletTetrahedron(prim_index: number, tetrahedron: btTetrahedronShapeEx): void;
-    lockChildShapes(): void;
-    unlockChildShapes(): void;
-    getChildAabb(child_index: number, t: btTransform, aabbMin: btVector3, aabbMax: btVector3): void;
-    getChildShape(index: number): btCollisionShape;
-    getChildShape(index: number): btCollisionShape;
+    getMeshPartCount(): number;
     getChildTransform(index: number): btTransform;
-    setChildTransform(index: number, transform: btTransform): void;
-    getGImpactShapeType(): eGIMPACT_SHAPE_TYPE;
-    getName(): string;
-    rayTest(rayFrom: btVector3, rayTo: btVector3, resultCallback: btCollisionWorld_RayResultCallback): void;
+    getChildShape(index: number): btCollisionShape;
+    getMeshInterface(): btStridingMeshInterface;
+    getBulletTetrahedron(prim_index: number, tetrahedron: btTetrahedronShapeEx): void;
+    getChildShape(index: number): btCollisionShape;
+    getChildAabb(child_index: number, t: btTransform, aabbMin: btVector3, aabbMax: btVector3): void;
+    lockChildShapes(): void;
+    needsRetrieveTetrahedrons(): boolean;
+    needsRetrieveTriangles(): boolean;
+    postUpdate(): void;
     processAllTriangles(callback: btTriangleCallback, aabbMin: btVector3, aabbMax: btVector3): void;
     processAllTrianglesRay(callback: btTriangleCallback, rayFrom: btVector3, rayTo: btVector3): void;
-    calculateSerializeBufferSize(): number;
+    rayTest(rayFrom: btVector3, rayTo: btVector3, resultCallback: btCollisionWorld_RayResultCallback): void;
+    setMargin(margin: number): void;
+    setChildTransform(index: number, transform: btTransform): void;
     serialize(dataBuffer: void, serializer: btSerializer): string;
+    setLocalScaling(scaling: btVector3): void;
+    unlockChildShapes(): void;
   }
 }

@@ -1,7 +1,8 @@
 declare module Ammo {
   declare class SoftBodyConfigData {
+
+    get_m_softRigidClusterHardness(): number;	set_m_softRigidClusterHardness(value: number): number;
     get_m_aeroModel(): number;	set_m_aeroModel(value: number): number;
-    get_m_baumgarte(): number;	set_m_baumgarte(value: number): number;
     get_m_damping(): number;	set_m_damping(value: number): number;
     get_m_drag(): number;	set_m_drag(value: number): number;
     get_m_lift(): number;	set_m_lift(value: number): number;
@@ -13,7 +14,7 @@ declare module Ammo {
     get_m_kineticContactHardness(): number;	set_m_kineticContactHardness(value: number): number;
     get_m_softContactHardness(): number;	set_m_softContactHardness(value: number): number;
     get_m_anchorHardness(): number;	set_m_anchorHardness(value: number): number;
-    get_m_softRigidClusterHardness(): number;	set_m_softRigidClusterHardness(value: number): number;
+    get_m_baumgarte(): number;	set_m_baumgarte(value: number): number;
     get_m_softKineticClusterHardness(): number;	set_m_softKineticClusterHardness(value: number): number;
     get_m_softSoftClusterHardness(): number;	set_m_softSoftClusterHardness(value: number): number;
     get_m_softRigidClusterImpulseSplit(): number;	set_m_softRigidClusterImpulseSplit(value: number): number;
@@ -26,5 +27,6 @@ declare module Ammo {
     get_m_driftIterations(): number;	set_m_driftIterations(value: number): number;
     get_m_clusterIterations(): number;	set_m_clusterIterations(value: number): number;
     get_m_collisionFlags(): number;	set_m_collisionFlags(value: number): number;
+
   }
 }
