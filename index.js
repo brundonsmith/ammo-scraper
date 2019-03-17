@@ -5,7 +5,10 @@ const { getPage } = require('./utils')
 
 const baseURL = `https://pybullet.org/Bullet/BulletFull/`
 
+// TODO: operators, inheritance, generics
+
 // write files
+//*
 fs.mkdirSync(path.resolve(__dirname, '@types/ammo.js'), { recursive: true });
 getPage(baseURL + `annotated.html`)
     .then(scrapeClassURLs)
@@ -13,28 +16,41 @@ getPage(baseURL + `annotated.html`)
         getPage(url)
             .then(scrapeClass)
             .then(clazz => 
-                fs.writeFileSync(path.resolve(__dirname, '@types/ammo.js', clazz.name + '.d.ts'), serializeClass(clazz)))))
-
+                fs.writeFileSync(path.resolve(__dirname, '@types/ammo.js', convertIdentifier(clazz.name) + '.d.ts'), serializeClass(clazz)))))
+//*/
 
 // TEST
 /*
 getPage(`https://pybullet.org/Bullet/BulletFull/classbtRigidBody.html`)
-    .then($ => {
-        console.log(serializeClass(scrapeClass($)))
-    })
-*/
+    .then($ => console.log(serializeClass(scrapeClass($))))
+*//*
+getPage(`https://pybullet.org/Bullet/BulletFull/classbtSimpleBroadphase.html`)
+    .then($ => console.log(serializeClass(scrapeClass($))))
+//*/
 
 
 // parse
 function scrapeClassURLs($) {
-    return $(`.directory tr a[href^="class"], .directory tr a[href^="struct"]`).toArray().map(el => baseURL + $(el).attr('href'))
+    return $(`.directory tr a[href^="class"], .directory tr a[href^="struct"]`).toArray()
+        .map(el => baseURL + $(el).attr('href'))
+        .filter((url, index, arr) => arr.indexOf(url) === index)
 }
 
 function scrapeClass($) {
     let name = $(`.headertitle .title`).text().split(' ')[0];
-    let members = $(`.memberdecls tr[class^="memitem"]`).toArray().map(el => $(el).text().trim())
-        .filter(decl => !decl.match(/^struct /gi) && !decl.match(/[\s]+~[a-z0-9_]+[\s]+\(/gi))
+    console.log('---'+name+'---')
+    let members = $(`.memberdecls`).toArray().filter(decl => 
+            $(decl).text().includes('Public Member Functions') ||
+            $(decl).text().includes('Public Attributes'))
+        .map(section => $(section).find(`tr[class^="memitem"]:not(.inherit)`).toArray())
+        .reduce((all, list) => all.concat(list), [])
+        .map(el => $(el).text().trim())
+        .filter(decl => 
+            !decl.match(/^};[\s]*/) && 
+            !decl.match(/^struct /gi) && 
+            !decl.match(/~[a-z0-9_:]+[\s]+\(/gi))
         .map(parseMember)
+        .filter(member => member != null)
 
     return {
         name,
@@ -43,48 +59,80 @@ function scrapeClass($) {
 }
 
 function parseMember(member) {
-    try {
-        let methodExp = /^(?:const |virtual |unsigned )*([a-z0-9_]+)[\s]+[*&]?[\s]*\*?[\s]*([a-z0-9_]+)[\s]+\(([^)]*)\)/gi
-        let result = methodExp.exec(member);
-        if(result != null) {
-            return {
-                kind: 'method',
-                name: result[2],
-                returnType: result[1],
-                arguments: result[3].split(/,[\s]*/gi).filter(arg => !!arg).map(parseArg)
-            }
-        } else {
-            let propertyExp = /^(?:const |unsigned )*([a-z0-9_]*)[\s]*[*&]?[\s]*\*?[\s]*([a-z0-9_]+)/gi
-            result = propertyExp.exec(member);
-            return {
-                kind: 'property',
-                name: result[2],
-                type: result[1],
+    let methodExp = /^(?:const |virtual |unsigned )*([a-z0-9_:]+)[\s]+[*&]?[\s]*\*?[\s]*([a-z0-9_:]+)[\s]+\(([^)]*)\)(?:=.*)?/gi
+    let result = methodExp.exec(member);
+    if(result != null) {
+        return {
+            kind: 'method',
+            name: result[2],
+            returnType: result[1],
+            arguments: result[3].split(/,[\s]*/gi).filter(arg => !!arg).map(parseArg)
+        }
+    } 
+
+    let constructorExp = /^(?:const |virtual |unsigned )*[\s]*[*&]?[\s]*\*?[\s]*([a-z0-9_:]+)[\s]+\((.*)\)$/gi
+    result = constructorExp.exec(member);
+    if(result != null) {
+        let argsArray = [];
+        let argsString = result[2];
+        let argExp = argExpression();
+        let argResult;
+        while(argResult = argExp.exec(argsString)) {
+            let arg = parseArg(argResult[0]);
+            if(arg != null) {
+                argsArray.push(arg);
+            } else {
+                console.error(`^ in member "${member}"`)
             }
         }
-    } catch(err) {
-        console.error(`Failed to parse "${member}"`)
-        return null;
+
+        return {
+            kind: 'constructor',
+            arguments: argsArray
+        }
     }
+
+    let propertyExp = /^(?:const |unsigned )*([a-z0-9_:]*)[\s]*[*&]?[\s]*\*?[\s]*([a-z0-9_:]+)/gi
+    result = propertyExp.exec(member);
+    if(result != null) {
+        return {
+            kind: 'property',
+            name: result[2],
+            type: result[1],
+        }
+    }
+
+    console.error(`Failed to parse member "${member}"`)
+    return null;
 }
 
 function parseArg(arg) {
-    let argExp = /^(?:const |class )*([a-z0-9_]*)[\s]*[*&]?([a-z0-9_]*)/gi
+    console.log(arg)
+    let argExp = argExpression();
     let result = argExp.exec(arg);
 
-    return {
-        name: result[2],
-        type: result[1]
+    if(result != null) {
+        return {
+            name: result[2],
+            type: result[1]
+        }
     }
+
+    console.error(`Failed to parse argument "${arg}"`)
+    return null;
 }
 
+const argExpression = () => 
+    /(?:const |class |unsigned |short )*([a-z_][a-z0-9_:]*)[\s]*[*&]?([a-z0-9_]+)(?:=[a-z0-9_:]+\([^\)]*\)|=[^,]*)?(?:, )?/gi
+    //                                          type             *&      name       =...                              ,
+    
 // serialize
 function serializeClass(clazz) {
     let decl = ``;
 
     decl += `declare module Ammo {\n`;
-    decl += `  declare class ${clazz.name} {\n`;
-    decl += clazz.members.map(member => '    ' + serializeMember(member) + ';\n').join('')
+    decl += `  declare class ${convertIdentifier(clazz.name)} {\n`;
+    decl += clazz.members.map(member => '    ' + serializeMember(member) + '\n').join('')
     decl += `  }\n`
     decl += `}\n`;
 
@@ -92,10 +140,20 @@ function serializeClass(clazz) {
 }
 
 function serializeMember(member) {
+    switch(member.kind) {
+        case 'method':
+            return `${convertIdentifier(member.name)}(${member.arguments.map(serializeArg).join(', ')}): ${convertType(member.returnType)};`;
+        case 'constructor':
+            return `constructor(${member.arguments.map(serializeArg).join(', ')});`;
+        case 'property':
+            return `get_${member.name}(): ${convertType(member.type)};\tset_${convertIdentifier(member.name)}(value: ${convertType(member.type)}): ${convertType(member.type)};`;
+    }
     if(member.kind === 'method') {
-        return `${member.name}(${member.arguments.map(serializeArg)}): ${convertType(member.returnType)}`;
+        return `${convertIdentifier(member.name)}(${member.arguments.map(serializeArg).join(', ')}): ${convertType(member.returnType)};`;
+    } else if(member.kind === 'constructor') {
+        return `constructor(${member.arguments.map(serializeArg).join(', ')})`
     } else {
-        return `public ${member.name}: ${convertType(member.type)}`;
+        return `public ${convertIdentifier(member.name)}: ${convertType(member.type)}`;
     }
 }
 
@@ -103,14 +161,19 @@ function serializeArg(arg) {
     return `${arg.name}: ${convertType(arg.type)}`
 }
 
+function convertIdentifier(name) {
+    return name.replace(/::/g, '_')
+}
+
 function convertType(type) {
-    type = type.trim();
+    type = convertIdentifier(type.trim());
 
     switch(type) {
         case 'int':
         case 'long':
         case 'float':
         case 'double':
+        case 'btScalar':
             return 'number';
         case 'bool':
             return 'boolean';
@@ -120,3 +183,4 @@ function convertType(type) {
             return type;
     }
 }
+
